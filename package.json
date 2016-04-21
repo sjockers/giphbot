@@ -1,0 +1,24 @@
+{
+  "name": "giphbot",
+  "version": "0.0.1",
+  "description": "Simple chatbot demo. Finds funny GIFs for you.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjockers/giphbot.git"
+  },
+  "author": "@sjockers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjockers/giphbot/issues"
+  },
+  "homepage": "https://github.com/sjockers/giphbot#readme",
+  "dependencies": {
+    "botkit": "^0.1.1",
+    "dotenv": "^2.0.0",
+    "standard": "^6.0.8"
+  }
+}
