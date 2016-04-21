@@ -1,26 +1,27 @@
 'use strict'
 
 require('dotenv').config()
-var Botkit = require('botkit')
 
-if (!process.env.token) {
+const SLACK_TOKEN = process.env.SLACK_TOKEN
+
+if (!SLACK_TOKEN) {
   console.log('Error: Specify token in environment')
   process.exit(1)
 }
 
-var controller = Botkit.slackbot({
+const Botkit = require('botkit')
+
+const controller = Botkit.slackbot({
   debug: false,
   storage: undefined
 })
 
-controller.spawn({
-  token: process.env.token
-}).startRTM(function (error) {
+controller.spawn({token: SLACK_TOKEN}).startRTM((error) => {
   if (error) {
     throw new Error(error)
   }
 })
 
-controller.hears(['hello', 'hi'], ['direct_message', 'direct_mention', 'mention'], function (bot, message) {
-  bot.reply(message, 'Hellooo!')
+controller.hears(['Hi', 'Hello', 'Guten Tag'], ['direct_message', 'direct_mention'], (bot, message) => {
+  bot.reply(message, ':wave:')
 })
