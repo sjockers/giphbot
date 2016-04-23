@@ -22,6 +22,32 @@ controller.spawn({token: SLACK_TOKEN}).startRTM((error) => {
   }
 })
 
-controller.hears(['Hi', 'Hello', 'Guten Tag'], ['direct_message', 'direct_mention'], (bot, message) => {
-  bot.reply(message, ':wave:')
+controller.hears(['pizzatime'], ['direct_message', 'direct_mention'], (bot, message) => {
+  function askFlavor (response, convo) {
+    convo.say(':pizza:')
+    convo.say('It is pizzatime! I am here to order a pizza for you.')
+    convo.ask('What flavor of pizza would you like?', (response, convo) => {
+      convo.say('Awesome.')
+      askSize(response, convo)
+      convo.next()
+    })
+  }
+
+  function askSize (response, convo) {
+    convo.ask('What size do you want?', (response, convo) => {
+      convo.say('Ok.')
+      askWhereDeliver(response, convo)
+      convo.next()
+    })
+  }
+
+  function askWhereDeliver (response, convo) {
+    convo.ask('So where do you want it delivered?', (response, convo) => {
+      convo.say('Understood! Your pizza is on its way')
+      convo.say('Talk to you later!')
+      convo.next()
+    })
+  }
+
+  bot.startConversation(message, askFlavor)
 })
