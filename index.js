@@ -22,32 +22,8 @@ controller.spawn({token: SLACK_TOKEN}).startRTM((error) => {
   }
 })
 
-controller.hears(['pizzatime'], ['direct_message', 'direct_mention'], (bot, message) => {
-  function askFlavor (response, convo) {
-    convo.say(':pizza:')
-    convo.say('It is pizzatime! I am here to order a pizza for you.')
-    convo.ask('What flavor of pizza would you like?', (response, convo) => {
-      convo.say('Awesome.')
-      askSize(response, convo)
-      convo.next()
-    })
-  }
+controller.hears(['gif of a (.*)'], ['direct_message', 'direct_mention'], (bot, message) => {
+  const queryString = message.match[1]
 
-  function askSize (response, convo) {
-    convo.ask('What size do you want?', (response, convo) => {
-      convo.say('Ok.')
-      askWhereDeliver(response, convo)
-      convo.next()
-    })
-  }
-
-  function askWhereDeliver (response, convo) {
-    convo.ask('So where do you want it delivered?', (response, convo) => {
-      convo.say('Understood! Your pizza is on its way')
-      convo.say('Talk to you later!')
-      convo.next()
-    })
-  }
-
-  bot.startConversation(message, askFlavor)
+  bot.reply(message, `You wanted me to find this GIF of a ${queryString}`)
 })
