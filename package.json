@@ -18,7 +18,9 @@
   "homepage": "https://github.com/sjockers/giphbot#readme",
   "dependencies": {
     "botkit": "^0.1.1",
+    "botkit-middleware-witai": "0.0.2",
     "dotenv": "^2.0.0",
+    "giphy-api": "^1.1.15",
     "standard": "^6.0.8"
   }
 }
